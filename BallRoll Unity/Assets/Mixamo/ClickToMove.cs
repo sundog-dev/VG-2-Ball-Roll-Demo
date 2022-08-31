@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ClickToMove : MonoBehaviour
 {
     Vector3 target;
     public float speed;
     public Animator animator;
+    public NavMeshAgent navMeshAgent;
 
     // Start is called before the first frame update
     //void Start()
@@ -36,13 +38,14 @@ public class ClickToMove : MonoBehaviour
             }
         }
 
-        Vector3 direction = target - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
+        // Vector3 direction = target - transform.position;
+        // transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
     }
 
     void SetNewTarget(Vector3 newTarget)
     {
         target = newTarget;
-        transform.LookAt(target);
+        // transform.LookAt(target);
+        navMeshAgent.SetDestination(target);
     }
 }
