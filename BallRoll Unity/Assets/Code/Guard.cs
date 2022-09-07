@@ -14,6 +14,8 @@ public class Guard : MonoBehaviour
     public LayerMask viewMask;
     float viewAngle;
 
+    bool startedGameOver = false;
+
     void Start()
     {
         navMeshAgent.SetDestination(firstWaypoint.transform.position);
@@ -28,6 +30,12 @@ public class Guard : MonoBehaviour
             spotlight.color = Color.red;
             navMeshAgent.speed = 8;
             navMeshAgent.SetDestination(player.position);
+
+            if (!startedGameOver)
+            {
+                GameManager.Instance.GameOver();
+                startedGameOver = true;
+            }
         }
     }
 
